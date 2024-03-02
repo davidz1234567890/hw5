@@ -18,7 +18,8 @@ always_comb begin
                  (~state[2]) & state[1] & (~state[0]) & b |
                  (~state[1]) & (~state[0]) & (~b);
 end
-assign found3zeros_N = (state[2] & state[1] & state[0]); //not sure about this
+assign found3zeros_N = ~(state[2] & state[1] & state[0]); //not sure about this
+  //asserted low
 always_ff @(posedge clock, posedge reset)
   if (reset)
     state <= 3'b0;
