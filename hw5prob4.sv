@@ -11,8 +11,8 @@ fsm11 dut (.*);
 
 
   initial
-    $monitor($time,,"State = %b, in(%b), out(%b)",
-                 dut.state, a, f);
+    $monitor($time,,"Current State = %s, Next State = %s, in(%b), out(%b)",
+                 dut.state.name, dut.nextstate.name, a, f);
   initial begin
     
     a <= 0; 
@@ -80,7 +80,7 @@ fsm11 dut (.*);
     
     @(posedge clock); 
 
-    #1 $display("here is the state:%s\n", dut.state); //prints ssaw0
+    #1 assert(dut.state == dut.ssaw0); //prints ssaw0
     reset_L = 0; $display("reset here"); #1 assert(dut.state == dut.nothing);
     reset_L <= 1; //a is still 0 here
 
